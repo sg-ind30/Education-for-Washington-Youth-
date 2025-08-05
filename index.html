@@ -1124,9 +1124,11 @@ document.getElementById('mentorForm').addEventListener('submit', async function(
         submitButton.disabled=true;
 
         try {
+            // Collect form data
             const formData=new FormData(this);
             const selectedPrograms=Array.from(programCheckboxes).map(cb=> cb.value);
 
+            // Prepare data object
             const data= {
                 name: formData.get('name'),
                 email: formData.get('email'),
@@ -1140,6 +1142,7 @@ document.getElementById('mentorForm').addEventListener('submit', async function(
 
             ;
 
+            // Handle file upload if present
             const resumeFile=formData.get('resume');
 
             if (resumeFile && resumeFile.size > 0) {
@@ -1156,50 +1159,40 @@ document.getElementById('mentorForm').addEventListener('submit', async function(
                 }
 
                 catch (fileError) {
-                    console.error("Resume upload failed", fileError);
+                    console.error('Error processing file:', fileError);
+                    // Continue without file if there's an error
                 }
             }
 
-            // ✅ THIS LINE sends the full package to Google Apps Script
-            submitForm({
-                type: "mentor", data
-            });
+            // Submit to Google Sheets
+            const result=await submitToGoogleSheets(data, 'mentor');
+
+            if (result.success) {
+                document.getElementById('mentorSuccessMessage').style.display='block';
+                this.reset();
+                document.getElementById('fileName').textContent='';
+
+                // Scroll to success message
+                document.getElementById('mentorSuccessMessage').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+        }
+
+        else {
+            throw new Error(result.error || 'Submission failed');
+        }
 
     }
 
     catch (error) {
-        console.error("Form submission failed", error);
-    }
+        console.error('Form submission error:', error);
+        document.getElementById('mentorErrorMessage').style.display='block';
 
-    // Submit to Google Sheets
-    const result=await submitToGoogleSheets(data, 'mentor');
-
-    if (result.success) {
-        document.getElementById('mentorSuccessMessage').style.display='block';
-        this.reset();
-        document.getElementById('fileName').textContent='';
-
-        // Scroll to success message
-        document.getElementById('mentorSuccessMessage').scrollIntoView({
+        document.getElementById('mentorErrorMessage').scrollIntoView({
             behavior: 'smooth',
             block: 'center'
         });
-}
-
-else {
-    throw new Error(result.error || 'Submission failed');
-}
-
-}
-
-catch (error) {
-    console.error('Form submission error:', error);
-    document.getElementById('mentorErrorMessage').style.display='block';
-
-    document.getElementById('mentorErrorMessage').scrollIntoView({
-        behavior: 'smooth',
-        block: 'center'
-    });
 }
 
 finally {
