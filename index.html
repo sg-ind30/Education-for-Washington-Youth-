@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Education for Washington Youth</title>
+    <title>Education for Washington Youth - Empowering Students Through STEM Mentorship</title>
     <style>
         * {
             margin: 0;
@@ -15,87 +16,113 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
 
-        /* Header & Navigation */
-        .header {
-            background: linear-gradient(135deg, #4b2e83 0%, #85754d 100%);
-            color: white;
-            padding: 1rem 0;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
-        .header.scrolled {
-            padding: 0.5rem 0;
-            background: rgba(75, 46, 131, 0.95);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
+            padding: 1rem 0;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .logo::before {
-            content: "🎓";
-            font-size: 2rem;
-            animation: bounce 2s infinite;
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1e3a5f, #2c5282);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(30, 58, 95, 0.3);
         }
 
-        .nav-menu {
+        .logo-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
         }
 
-        .nav-menu a {
-            color: white;
+        .nav-links a {
             text-decoration: none;
+            color: #333;
             font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            transition: color 0.3s ease;
             position: relative;
         }
 
-        .nav-menu a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
+        .nav-links a:hover {
+            color: #667eea;
         }
 
-        .mobile-menu-toggle {
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            color: #333;
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #4b2e83 0%, #85754d 100%);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
             color: white;
-            padding: 150px 0 100px;
+            padding: 120px 0 80px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -108,15 +135,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(255,107,53,0.1) 0%, transparent 50%);
-            opacity: 0.8;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
             position: relative;
             z-index: 2;
         }
@@ -125,485 +153,610 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .hero p {
             font-size: 1.3rem;
             margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             opacity: 0.95;
-            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
         .cta-button {
             display: inline-block;
-            background: linear-gradient(45deg, #ff6b35, #ff8c42);
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
             color: white;
-            padding: 15px 40px;
+            padding: 15px 30px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: bold;
             font-size: 1.1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255,107,53,0.3);
-            animation: fadeInUp 1s ease-out 0.6s both;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255,107,53,0.4);
+            box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
         }
 
-        /* Sections */
-        .section {
+        /* Main Content */
+        main {
+            background: white;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+            border-radius: 40px 40px 0 0;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
             padding: 80px 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 3rem;
-            color: #4b2e83;
-            position: relative;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #ff6b35, #85754d);
-            border-radius: 2px;
-            animation: slideIn 1s ease-out;
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* About Section */
-        .about {
-            background: linear-gradient(135deg, #f8f9ff 0%, #fff5f0 100%);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInLeft 1s ease-out forwards;
-        }
-
-        .about-text p:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .about-text p:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        .about-image {
-            background: linear-gradient(135deg, #4b2e83, #85754d);
-            border-radius: 20px;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            box-shadow: 0 20px 60px rgba(75,46,131,0.2);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Programs Section */
+        /* Programs Grid */
         .programs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            margin-top: 3rem;
         }
 
         .program-card {
             background: white;
-            padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            border: 1px solid rgba(75,46,131,0.1);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out forwards;
+            position: relative;
+            overflow: hidden;
         }
 
-        .program-card:nth-child(1) { animation-delay: 0.1s; }
-        .program-card:nth-child(2) { animation-delay: 0.2s; }
-        .program-card:nth-child(3) { animation-delay: 0.3s; }
-        .program-card:nth-child(4) { animation-delay: 0.4s; }
-        .program-card:nth-child(5) { animation-delay: 0.5s; }
-        .program-card:nth-child(6) { animation-delay: 0.6s; }
+        .program-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
 
         .program-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .program-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-            animation: bounce 2s infinite;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
         }
 
         .program-card h3 {
-            color: #4b2e83;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            font-size: 1.4rem;
+            color: #333;
         }
 
-        /* About Us Section */
-        .impact {
-            background: linear-gradient(135deg, #4b2e83 0%, #85754d 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .impact::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        .about-us-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .about-us-text h3 {
-            font-size: 2rem;
+        .program-card p {
+            color: #666;
             margin-bottom: 1.5rem;
-            color: #ff6b35;
         }
 
-        .about-us-text p {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-            opacity: 0.95;
+        .program-features {
+            list-style: none;
         }
 
-        .mission-points {
+        .program-features li {
+            padding: 0.5rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .program-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        /* Interest Section */
+        .interest-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
         }
 
-        .mission-point {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .mission-point:hover {
-            transform: translateY(-5px);
-            background: rgba(255,255,255,0.15);
-        }
-
-        .mission-icon {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 1rem;
-            animation: pulse 2s infinite;
-        }
-
-        .mission-point p {
-            margin: 0;
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-
-        /* Get Involved Section */
-        .involvement-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .involvement-card {
-            text-align: center;
-            padding: 2rem;
+        .interest-card {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .involvement-card:hover {
-            transform: translateY(-5px);
-            border-color: #4b2e83;
-        }
-
-        .involvement-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-            animation: bounce 2s infinite;
-        }
-
-        .involvement-card h3 {
-            color: #4b2e83;
-            margin-bottom: 1rem;
-        }
-
-        .involvement-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #4b2e83, #85754d);
-            color: white;
-            padding: 10px 25px;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .involvement-button::before {
+        .interest-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
         }
 
-        .involvement-button:hover::before {
-            left: 100%;
+        .interest-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
-        .involvement-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(75,46,131,0.3);
+        .interest-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2rem;
+            color: white;
         }
 
-        /* Contact Section */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
-        }
-
-        .contact-info h3 {
-            color: #4b2e83;
+        .interest-card h3 {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
-            font-size: 1.5rem;
+            color: #333;
         }
 
-        .contact-info p {
-            margin-bottom: 2rem;
+        .interest-card p {
             color: #666;
+            margin-bottom: 2rem;
             line-height: 1.6;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInLeft 1s ease-out forwards;
+        .interest-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
-        .contact-item:nth-child(3) { animation-delay: 0.1s; }
-        .contact-item:nth-child(4) { animation-delay: 0.2s; }
-        .contact-item:nth-child(5) { animation-delay: 0.3s; }
-        .contact-item:nth-child(6) { animation-delay: 0.4s; }
+        .interest-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
 
-        .contact-icon {
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, #4b2e83, #85754d);
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            margin: 2% auto;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .close {
             color: white;
-            padding: 10px;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 2001;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 50%;
-            min-width: 40px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+
+        /* Form Styles in Modal */
+        .modal .form-container {
+            margin: 0;
+            max-width: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+        }
+
+        .modal .form-header {
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            padding: 40px 30px;
             text-align: center;
         }
 
-        .contact-item strong {
-            color: #4b2e83;
+        .modal .form-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .modal .form-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .modal .form-content {
+            padding: 40px 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .modal .form-group {
+            margin-bottom: 25px;
+        }
+
+        .modal .form-group label {
             display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .contact-item p {
-            margin: 0;
-            color: #666;
-        }
-
-        /* Contact Form */
-        .contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            border: 1px solid rgba(75,46,131,0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #4b2e83;
             font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1rem;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .modal .required {
+            color: #e74c3c;
+        }
+
+        .modal input[type="text"],
+        .modal input[type="email"],
+        .modal select,
+        .modal textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
+            padding: 12px 16px;
+            border: 2px solid #e1e8ed;
             border-radius: 10px;
             font-size: 1rem;
             transition: all 0.3s ease;
+            background: white;
             font-family: inherit;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .modal input[type="text"]:focus,
+        .modal input[type="email"]:focus,
+        .modal select:focus,
+        .modal textarea:focus {
             outline: none;
-            border-color: #4b2e83;
-            box-shadow: 0 0 0 3px rgba(75,46,131,0.1);
+            border-color: #4a90e2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
             transform: translateY(-2px);
         }
 
-        .form-group textarea {
+        .modal textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
-        .submit-button {
-            background: linear-gradient(135deg, #4b2e83, #85754d);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
+        .modal .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .modal .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px solid transparent;
             transition: all 0.3s ease;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(75,46,131,0.3);
-            position: relative;
-            overflow: hidden;
         }
 
-        .submit-button::before {
-            content: '';
+        .modal .checkbox-item:hover {
+            background: #e3f2fd;
+            border-color: #4a90e2;
+        }
+
+        .modal .checkbox-item input[type="checkbox"] {
+            margin-right: 12px;
+            margin-top: 3px;
+            transform: scale(1.2);
+        }
+
+        .modal .checkbox-item label {
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+
+        .modal .checkbox-item .description {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .modal .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .modal .file-upload input[type="file"] {
             position: absolute;
-            top: 0;
-            left: -100%;
+            opacity: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
+            cursor: pointer;
         }
 
-        .submit-button:hover::before {
-            left: 100%;
+        .modal .file-upload-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        .submit-button:hover {
+        .modal .file-upload-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(75,46,131,0.4);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.3);
         }
 
-        .submit-button:disabled {
+        .modal .file-name {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .modal .submit-button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #27ae60 0%, #219a52 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .modal .submit-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(39, 174, 96, 0.3);
+        }
+
+        .modal .submit-button:disabled {
             opacity: 0.7;
             cursor: not-allowed;
-            transform: none;
         }
 
-        .form-status {
-            margin-top: 1rem;
-            padding: 1rem;
+        .modal .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        /* Success message */
+        .success-message {
+            background: linear-gradient(135deg, #27ae60, #219a52);
+            color: white;
+            padding: 15px 20px;
             border-radius: 10px;
+            margin-bottom: 20px;
             text-align: center;
             font-weight: 600;
             display: none;
         }
 
-        .form-status.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+        .error-message {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
         }
 
-        .form-status.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -30px;
+            border-right-color: white;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -30px;
+            border-left-color: white;
+        }
+
+        .timeline-season {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            color: #666;
+        }
+
+        /* Guidelines */
+        .guidelines {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .guideline-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            padding: 2.5rem;
+            border-radius: 20px;
+            border-left: 5px solid;
+            border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+        }
+
+        .guideline-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .guideline-section ul {
+            list-style: none;
+        }
+
+        .guideline-section li {
+            padding: 0.75rem 0;
+            color: #555;
+            position: relative;
+            padding-left: 2rem;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .guideline-section li:last-child {
+            border-bottom: none;
+        }
+
+        .guideline-section li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
         /* Footer */
-        .footer {
-            background: #2c1810;
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
-            padding: 50px 0 30px;
+            padding: 3rem 0;
+            text-align: center;
         }
 
         .footer-content {
@@ -614,156 +767,46 @@
         }
 
         .footer-section h3 {
-            color: #ff6b35;
             margin-bottom: 1rem;
+            color: #ecf0f1;
         }
 
         .footer-section p, .footer-section a {
-            color: #ccc;
+            color: #bdc3c7;
             text-decoration: none;
-            line-height: 1.8;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
         }
 
         .footer-section a:hover {
-            color: #ff6b35;
-            transform: translateX(5px);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            background: #4b2e83;
-            padding: 10px;
-            border-radius: 50%;
-            display: inline-block;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .social-links a:hover {
-            background: #ff6b35;
-            transform: translateY(-3px) scale(1.1);
+            color: #667eea;
         }
 
         .footer-bottom {
-            text-align: center;
+            border-top: 1px solid #34495e;
             padding-top: 2rem;
-            border-top: 1px solid #555;
-            color: #999;
+            margin-top: 2rem;
+            color: #95a5a6;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                width: 0;
-            }
-            to {
-                width: 80px;
-            }
-        }
-
-        /* Scroll animations */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.6s ease-out;
-        }
-
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Responsivity */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-menu {
+            .nav-links {
                 display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: rgba(75,46,131,0.95);
+                background: white;
                 flex-direction: column;
                 padding: 1rem;
-                gap: 0;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             }
 
-            .nav-menu.active {
+            .nav-links.active {
                 display: flex;
             }
 
-            .nav-menu a {
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .mobile-menu-toggle {
+            .mobile-menu-btn {
                 display: block;
             }
 
@@ -775,149 +818,791 @@
                 font-size: 1.1rem;
             }
 
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
             .section-title {
                 font-size: 2rem;
             }
 
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .timeline::before {
+                left: 20px;
             }
 
-            .contact-form {
-                padding: 1.5rem;
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                margin-right: 0 !important;
             }
 
-            .mission-points {
+            .timeline-content::before {
+                left: -30px !important;
+                right: auto !important;
+                border-right-color: white !important;
+                border-left-color: transparent !important;
+            }
+
+            .guidelines {
                 grid-template-columns: 1fr;
             }
 
-            .programs-grid {
-                grid-template-columns: 1fr;
+            .guideline-section {
+                min-width: unset;
             }
 
-            .involvement-grid {
-                grid-template-columns: 1fr;
+            .modal .form-content {
+                padding: 20px 15px;
             }
+
+            .modal .form-header {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <div class="logo">Education for Washington Youth</div>
-            <nav>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#programs">Programs</a></li>
-                    <li><a href="#aboutus">About Us</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
-            </nav>
-        </div>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Washington State outline -->
+                        <path d="M15,25 Q20,20 30,25 L40,20 Q50,15 60,20 L75,25 Q85,30 90,40 L85,50 Q80,60 70,65 L60,70 Q50,75 40,70 L30,65 Q20,60 15,50 Z" fill="white" opacity="0.8"/>
+                        <!-- Book -->
+                        <rect x="35" y="40" width="30" height="20" rx="2" fill="white"/>
+                        <line x1="35" y1="50" x2="65" y2="50" stroke="#1e3a5f" stroke-width="1"/>
+                        <line x1="40" y1="45" x2="60" y2="45" stroke="#1e3a5f" stroke-width="0.5"/>
+                        <line x1="40" y1="55" x2="60" y2="55" stroke="#1e3a5f" stroke-width="0.5"/>
+                        <!-- Graduation cap -->
+                        <polygon points="35,35 65,35 60,30 40,30" fill="white"/>
+                        <rect x="48" y="28" width="4" height="8" fill="white"/>
+                        <circle cx="52" cy="28" r="2" fill="white"/>
+                    </svg>
+                </div>
+                <span>EWY</span>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#programs">Programs</a></li>
+                <li><a href="#interest">Get Involved</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#guidelines">Guidelines</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Empowering Future Innovators Through STEM Education</h1>
-            <p>UW students expanding STEM access through Science Olympiad coaching, mentorship workshops, and hands-on educational experiences for middle and high school students across Washington</p>
-            <a href="#get-involved" class="cta-button">Join Our Mission</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
         <div class="container">
-            <h2 class="section-title scroll-reveal">About Our Mission</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>UW Education for Washington Youth is a student-led nonprofit founded by passionate University of Washington students committed to expanding STEM access for students across Washington. We partner with local middle and high schools to create hands-on, engaging educational experiences that introduce students to the exciting world of science, technology, engineering, and math.</p>
-                    
-                    <p>We specialize in developing programs such as Science Olympiad coaching, mentorship workshops, and STEM talks that bring real-world insight and college-level mentorship directly to students in communities where there are minimal STEM enrichment programs.</p>
-                    
-                    <p>Our team consists of UW students from diverse majors—Bioengineering, Computer Science, Physics, Environmental Science, and more. Each team member brings not only subject expertise, but also a strong foundation in communication, teaching, and youth mentorship.</p>
-                </div>
-                <div class="about-image">
-                    📚✨
-                </div>
+            <div class="hero-content">
+                <h1>Education for Washington Youth</h1>
+                <p>Closing opportunity gaps by connecting underserved K–12 students with University of Washington mentors through innovative STEM programs</p>
+                <a href="#programs" class="cta-button">Explore Our Programs</a>
             </div>
         </div>
     </section>
 
-    <!-- Programs Section -->
-    <section id="programs" class="section">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">Our Programs</h2>
+    <main>
+        <section id="mission" class="container">
+            <h2 class="section-title">Our Mission</h2>
+            <p class="section-subtitle">
+                Education for Washington Youth (EWY) is a nonprofit dedicated to closing opportunity gaps by connecting underserved K–12 students in Washington State with University of Washington (UW) student mentors. Through our Science Olympiad, Math Olympiad, VEX Robotics, and academic mentorship programs, we aim to develop confident, skilled, and motivated young leaders in STEM and other academic fields.
+            </p>
+        </section>
+
+        <section id="programs" class="container">
+            <h2 class="section-title">Our Programs</h2>
+            <p class="section-subtitle">
+                EWY offers structured mentorship programs led by trained UW student volunteers. Each program is designed to provide targeted guidance, educational resources, and role-model support.
+            </p>
+            
             <div class="programs-grid">
-                <div class="program-card">
-                    <span class="program-icon">🏆</span>
-                    <h3>Science Olympiad Coaching</h3>
-                    <p>UW students mentor middle schoolers in Science Olympiad events with hands-on lessons, project-building, and competition preparation leading to regional and state tournaments.</p>
+                <div class="program-card fade-in">
+                    <div class="program-icon">🔬</div>
+                    <h3>Science Olympiad Mentorship</h3>
+                    <p>University of Washington students with experience in Science Olympiad provide weekly mentorship to middle and high school teams.</p>
+                    <ul class="program-features">
+                        <li>Weekly subject-specific coaching sessions</li>
+                        <li>Access to past exams and study guides</li>
+                        <li>Mock testing events and regional prep camps</li>
+                    </ul>
                 </div>
-                <div class="program-card">
-                    <span class="program-icon">🧪</span>
-                    <h3>STEM Workshops</h3>
-                    <p>Interactive sessions covering diverse STEM topics led by UW students from Bioengineering, Computer Science, Physics, Environmental Science, and more.</p>
+
+                <div class="program-card fade-in">
+                    <div class="program-icon">📊</div>
+                    <h3>Math Olympiad Mentorship</h3>
+                    <p>UW students assist students preparing for Math Olympiad contests such as AMC 8/10, MathCounts, and school-based math leagues.</p>
+                    <ul class="program-features">
+                        <li>Tiered instruction by grade level</li>
+                        <li>Weekly problem-solving sessions</li>
+                        <li>Math strategy bootcamps and competition simulations</li>
+                    </ul>
                 </div>
-                <div class="program-card">
-                    <span class="program-icon">🎯</span>
-                    <h3>Mentorship Programs</h3>
-                    <p>Long-term mentorship relationships between UW students and middle schoolers, covering college experience, career paths, study habits, and personal development.</p>
+
+                <div class="program-card fade-in">
+                    <div class="program-icon">🤖</div>
+                    <h3>Robotics Mentorship (VEX IQ)</h3>
+                    <p>EWY helps students get involved in VEX IQ Robotics by providing engineering, design, and coding mentorship.</p>
+                    <ul class="program-features">
+                        <li>Robot design and build support</li>
+                        <li>Programming workshops using VEXcode</li>
+                        <li>Team organization and competition prep</li>
+                    </ul>
                 </div>
-                <div class="program-card">
-                    <span class="program-icon">💡</span>
-                    <h3>STEM Talks</h3>
-                    <p>Real-world insights from UW students sharing their college experiences and career journeys in science and technology fields.</p>
-                </div>
-                <div class="program-card">
-                    <span class="program-icon">🔬</span>
-                    <h3>Hands-On Projects</h3>
-                    <p>Project-based learning experiences that bring STEM concepts to life through practical application and creative problem-solving.</p>
-                </div>
-                <div class="program-card">
-                    <span class="program-icon">🌱</span>
-                    <h3>Community Building</h3>
-                    <p>Creating inclusive communities of learners and leaders while fostering stronger academic engagement and STEM culture in schools.</p>
+
+                <div class="program-card fade-in">
+                    <div class="program-icon">🎓</div>
+                    <h3>UW Student Mentorship</h3>
+                    <p>This unique program matches students with UW mentors based on their future academic or career interests.</p>
+                    <ul class="program-features">
+                        <li>Day-in-the-life mentor shadows (virtual or in-person)</li>
+                        <li>Career-aligned mentorship in CS, Pre-Med, Engineering, etc.</li>
+                        <li>Coding, anatomy, and study skills camps</li>
+                        <li>Resume-building workshops and productivity systems</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Us Section -->
-    <section id="aboutus" class="section impact">
-        <div class="container">
-            <h2 class="section-title scroll-reveal">About Us</h2>
-            <div class="about-us-content">
-                <div class="about-us-text">
-                    <h3>Our Mission</h3>
-                    <p>Our mission is to increase access to high-quality STEM education by supporting schools and communities that historically lack resources and representation in science and technology fields.</p>
-                    
-                    <div class="mission-points">
-                        <div class="mission-point">
-                            <span class="mission-icon">🤝</span>
-                            <p>Build long-term mentorship relationships between UW students and middle schoolers</p>
+        <section id="interest" class="container">
+            <h2 class="section-title">Get Involved</h2>
+            <p class="section-subtitle">
+                Ready to make a difference? Whether you're a UW student looking to mentor or a K-12 student seeking mentorship, we'd love to connect with you.
+            </p>
+            
+            <div class="interest-options">
+                <div class="interest-card fade-in">
+                    <div class="interest-icon">🎓</div>
+                    <h3>Become a Mentor</h3>
+                    <p>Join our team of dedicated UW student mentors and help close opportunity gaps for underserved students across Washington State.</p>
+                    <button class="interest-button" onclick="showMentorForm()">Apply to Be a Mentor</button>
+                </div>
+                
+                <div class="interest-card fade-in">
+                    <div class="interest-icon">📚</div>
+                    <h3>Find a Mentor</h3>
+                    <p>Are you a K-12 student interested in STEM mentorship? Connect with experienced UW mentors in your area of interest.</p>
+                    <button class="interest-button" onclick="showMenteeForm()">Request Mentorship</button>
+                </div>
+            </div>
+
+            <!-- Hidden Mentor Form -->
+            <div id="mentorFormModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeMentorForm()">&times;</span>
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h1>Education for Washington Youth</h1>
+                            <p>Mentor Interest Form - Join us in closing opportunity gaps for K-12 students across Washington State</p>
                         </div>
-                        <div class="mission-point">
-                            <span class="mission-icon">✨</span>
-                            <p>Inspire curiosity, confidence, and passion in STEM through competitions, projects, and community</p>
-                        </div>
-                        <div class="mission-point">
-                            <span class="mission-icon">🌉</span>
-                            <p>Bridge the gap between early education and advanced STEM pathways</p>
+                        
+                        <div class="form-content">
+                            <div id="mentorSuccessMessage" class="success-message">
+                                Thank you for your interest in becoming an EWY mentor! We will review your application and contact you within 1-2 weeks.
+                            </div>
+                            <div id="mentorErrorMessage" class="error-message">
+                                There was an error submitting your form. Please try again or contact us directly.
+                            </div>
+                            
+                            <form id="mentorForm">
+                                <div class="form-group">
+                                    <label for="name">Full Name <span class="required">*</span></label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" required>
+                                    <div class="help-text">Please use your UW email address</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="year">Current Year at UW <span class="required">*</span></label>
+                                    <select id="year" name="year" required>
+                                        <option value="">Select your year</option>
+                                        <option value="freshman">Freshman</option>
+                                        <option value="sophomore">Sophomore</option>
+                                        <option value="junior">Junior</option>
+                                        <option value="senior">Senior</option>
+                                        <option value="graduate">Graduate Student</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="major">Major/Field of Study <span class="required">*</span></label>
+                                    <input type="text" id="major" name="major" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Which mentorship programs are you interested in volunteering for? <span class="required">*</span></label>
+                                    <div class="help-text">Select all that apply. You can participate in multiple programs.</div>
+                                    <div class="checkbox-group">
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="science-olympiad" name="programs" value="science-olympiad">
+                                            <div>
+                                                <label for="science-olympiad">Science Olympiad Mentorship</label>
+                                                <div class="description">Weekly coaching for middle/high school teams on content review, experimental design, and competition strategy</div>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="math-olympiad" name="programs" value="math-olympiad">
+                                            <div>
+                                                <label for="math-olympiad">Math Olympiad Mentorship</label>
+                                                <div class="description">Help students prepare for AMC 8/10, MathCounts, and math leagues with problem-solving sessions</div>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="robotics" name="programs" value="robotics">
+                                            <div>
+                                                <label for="robotics">VEX IQ Robotics Mentorship</label>
+                                                <div class="description">Guide students in robot design, coding with VEXcode, and competition preparation</div>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="general-mentorship" name="programs" value="general-mentorship">
+                                            <div>
+                                                <label for="general-mentorship">UW Student Mentorship</label>
+                                                <div class="description">Career-aligned mentorship, study skills, college prep, and academic guidance</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="time-commitment">What is your time commitment availability for Fall Quarter? <span class="required">*</span></label>
+                                    <select id="time-commitment" name="time-commitment" required>
+                                        <option value="">Select your availability</option>
+                                        <option value="1-2-hours">1-2 hours per week</option>
+                                        <option value="3-4-hours">3-4 hours per week</option>
+                                        <option value="5-6-hours">5-6 hours per week</option>
+                                        <option value="7-plus-hours">7+ hours per week</option>
+                                        <option value="flexible">Flexible - varies by week</option>
+                                    </select>
+                                    <div class="help-text">This helps us match you with appropriate mentorship opportunities</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="motivation">Why do you want to become a mentor with EWY? <span class="required">*</span></label>
+                                    <textarea id="motivation" name="motivation" required placeholder="Share your passion for education, community service, and helping underserved students..."></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="experience">What relevant experience do you have? <span class="required">*</span></label>
+                                    <textarea id="experience" name="experience" required placeholder="Include academic achievements, tutoring experience, competition participation, leadership roles, volunteer work, etc."></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="resume">Upload Your Resume</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx">
+                                        <div class="file-upload-button">
+                                            📄 Choose Resume File
+                                        </div>
+                                    </div>
+                                    <div class="file-name" id="fileName"></div>
+                                    <div class="help-text">Optional: Upload in PDF, DOC, or DOCX format</div>
+                                </div>
+
+                                <button type="submit" class="submit-button" id="mentorSubmitBtn">Submit Application</button>
+                            </form>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Hidden Mentee Form -->
+            <div id="menteeFormModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeMenteeForm()">&times;</span>
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h1>Request Mentorship</h1>
+                            <p>Connect with experienced UW mentors to accelerate your STEM journey</p>
+                        </div>
+                        
+                        <div class="form-content">
+                            <div id="menteeSuccessMessage" class="success-message">
+                                Thank you for your mentorship request! We will match you with a suitable mentor and contact your parent/guardian within 1-2 weeks.
+                            </div>
+                            <div id="menteeErrorMessage" class="error-message">
+                                There was an error submitting your form. Please try again or contact us directly.
+                            </div>
+                            
+                            <form id="menteeForm">
+                                <div class="form-group">
+                                    <label for="studentName">Student Name <span class="required">*</span></label>
+                                    <input type="text" id="studentName" name="studentName" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="parentEmail">Parent/Guardian Email <span class="required">*</span></label>
+                                    <input type="email" id="parentEmail" name="parentEmail" required>
+                                    <div class="help-text">We'll use this to coordinate mentorship details</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="studentGrade">Current Grade <span class="required">*</span></label>
+                                    <select id="studentGrade" name="studentGrade" required>
+                                        <option value="">Select grade level</option>
+                                        <option value="6">6th Grade</option>
+                                        <option value="7">7th Grade</option>
+                                        <option value="8">8th Grade</option>
+                                        <option value="9">9th Grade (Freshman)</option>
+                                        <option value="10">10th Grade (Sophomore)</option>
+                                        <option value="11">11th Grade (Junior)</option>
+                                        <option value="12">12th Grade (Senior)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>What activities are you interested in? <span class="required">*</span></label>
+                                    <div class="help-text">Select all that interest you. We'll match you with mentors in these areas.</div>
+                                    <div class="checkbox-group">
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="student-science-olympiad" name="activities" value="science-olympiad">
+                                            <div>
+                                                <label for="student-science-olympiad">Science Olympiad</label>
+                                                <div class="description">Competitive science events covering biology, chemistry, physics, engineering, and more</div>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="student-math-olympiad" name="activities" value="math-olympiad">
+                                            <div>
+                                                <label for="student-math-olympiad">Math Competitions</label>
+                                                <div class="description">AMC 8/10, MathCounts, and problem-solving strategies</div>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="student-robotics" name="activities" value="robotics">
+                                            <div>
+                                                <label for="student-robotics">VEX IQ Robotics</label>
+                                                <div class="description">Robot design, programming, and engineering challenges</div>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox-item">
+                                            <input type="checkbox" id="student-academic" name="activities" value="academic-mentorship">
+                                            <div>
+                                                <label for="student-academic">Academic Mentorship</label>
+                                                <div class="description">Study skills, college prep, career exploration, and STEM guidance</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="student-time-commitment">What is your availability for mentorship sessions? <span class="required">*</span></label>
+                                    <select id="student-time-commitment" name="student-time-commitment" required>
+                                        <option value="">Select your availability</option>
+                                        <option value="weekday-after-school">Weekdays after school (3-6 PM)</option>
+                                        <option value="weekday-evening">Weekday evenings (6-8 PM)</option>
+                                        <option value="saturday-morning">Saturday mornings</option>
+                                        <option value="saturday-afternoon">Saturday afternoons</option>
+                                        <option value="sunday-afternoon">Sunday afternoons</option>
+                                        <option value="flexible">Flexible - can work with mentor's schedule</option>
+                                    </select>
+                                    <div class="help-text">Most mentorship sessions are 1-2 hours per week</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="student-goals">What are your goals for mentorship? <span class="required">*</span></label>
+                                    <textarea id="student-goals" name="student-goals" required placeholder="Tell us what you hope to achieve through mentorship - improving in competitions, learning new skills, college preparation, etc."></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="student-experience">Tell us about your current experience and interests</label>
+                                    <textarea id="student-experience" name="student-experience" placeholder="Share any relevant experience, favorite subjects, competitions you've participated in, or what excites you about STEM..."></textarea>
+                                </div>
+
+                                <button type="submit" class="submit-button" id="menteeSubmitBtn">Submit Mentorship Request</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="container">
+            <h2 class="section-title">Implementation Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-season">Fall (September–December)</div>
+                        <div class="timeline-description">Program launch, recruitment, and first mentorship cycles</div>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-season">Winter (January–March)</div>
+                        <div class="timeline-description">Continued mentorship and prep for competitions</div>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-season">Spring (April–June)</div>
+                        <div class="timeline-description">Final competition support and showcase</div>
+                    </div>
+                </div>
+                <div class="timeline-item fade-in">
+                    <div class="timeline-content">
+                        <div class="timeline-season">Summer (July–August)</div>
+                        <div class="timeline-description">Camps, reflection, and planning for expansion</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guidelines" class="container">
+            <h2 class="section-title">Program Guidelines</h2>
+            <div class="guidelines">
+                <div class="guideline-section fade-in">
+                    <h3>Guidelines for Mentees</h3>
+                    <ul>
+                        <li>Be respectful, prepared, and open to learning</li>
+                        <li>Attend all scheduled sessions and communicate absences early</li>
+                        <li>Complete assigned tasks and actively participate</li>
+                    </ul>
+                </div>
+                <div class="guideline-section fade-in">
+                    <h3>Guidelines for Mentors</h3>
+                    <ul>
+                        <li>Commit to consistent, prepared mentorship</li>
+                        <li>Tailor sessions to mentee goals and academic level</li>
+                        <li>Report progress and issues to EWY leadership</li>
+                        <li>Serve as a role model and source of inspiration</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Education for Washington Youth</h3>
+                    <p>Empowering the next generation of STEM leaders through mentorship and opportunity.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Ready to get involved? Reach out to learn more about our programs.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Get Involved</h3>
+                    <p>Whether you're a student looking for mentorship or a UW student ready to mentor, we'd love to connect with you.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Education for Washington Youth. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration - Replace with your actual Google Apps Script URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLotOrO9LBc66Pgn9DLRKUwUFdPal7l7tg7YEPypOf_08tA_aN5kQIjL6Tk9PZZ16iIQ/exec';
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Add some interactive elements
+        document.querySelectorAll('.program-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-10px) scale(1)';
+            });
+        });
+
+        // Modal functions
+        function showMentorForm() {
+            document.getElementById('mentorFormModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            // Hide any previous messages
+            document.getElementById('mentorSuccessMessage').style.display = 'none';
+            document.getElementById('mentorErrorMessage').style.display = 'none';
+        }
+
+        function showMenteeForm() {
+            document.getElementById('menteeFormModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            // Hide any previous messages
+            document.getElementById('menteeSuccessMessage').style.display = 'none';
+            document.getElementById('menteeErrorMessage').style.display = 'none';
+        }
+
+        function closeMenteeForm() {
+            document.getElementById('menteeFormModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeMentorForm() {
+            document.getElementById('mentorFormModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const mentorModal = document.getElementById('mentorFormModal');
+            const menteeModal = document.getElementById('menteeFormModal');
+            if (event.target == mentorModal) {
+                closeMentorForm();
+            }
+            if (event.target == menteeModal) {
+                closeMenteeForm();
+            }
+        }
+
+        // Handle file upload display
+        document.getElementById('resume').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '';
+            const fileNameDiv = document.getElementById('fileName');
+            if (fileName) {
+                fileNameDiv.textContent = `Selected: ${fileName}`;
+                fileNameDiv.style.color = '#27ae60';
+            } else {
+                fileNameDiv.textContent = '';
+            }
+        });
+
+        // Function to convert file to base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        // Function to submit form data to Google Sheets
+        async function submitToGoogleSheets(formData, formType) {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: formType,
+                        data: formData,
+                        timestamp: new Date().toISOString()
+                    })
+                });
+
+                // Since we're using no-cors mode, we can't read the response
+                // We'll assume success if no error is thrown
+                return { success: true };
+            } catch (error) {
+                console.error('Error submitting to Google Sheets:', error);
+                return { success: false, error: error.message };
+            }
+        }
+
+        // Handle mentor form submission
+        document.getElementById('mentorForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Check if at least one program is selected
+            const programCheckboxes = document.querySelectorAll('input[name="programs"]:checked');
+            if (programCheckboxes.length === 0) {
+                alert('Please select at least one mentorship program you\'re interested in.');
+                return;
+            }
+
+            const submitButton = document.getElementById('mentorSubmitBtn');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const selectedPrograms = Array.from(programCheckboxes).map(cb => cb.value);
+                
+                // Prepare data object
+                const data = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    year: formData.get('year'),
+                    major: formData.get('major'),
+                    programs: selectedPrograms.join(', '),
+                    timeCommitment: formData.get('time-commitment'),
+                    motivation: formData.get('motivation'),
+                    experience: formData.get('experience')
+                };
+
+                // Handle file upload if present
+                const resumeFile = formData.get('resume');
+                if (resumeFile && resumeFile.size > 0) {
+                    try {
+                        const base64File = await fileToBase64(resumeFile);
+                        data.resume = {
+                            name: resumeFile.name,
+                            data: base64File,
+                            type: resumeFile.type
+                        };
+                    } catch (fileError) {
+                        console.error('Error processing file:', fileError);
+                        // Continue without file if there's an error
+                    }
+                }
+
+                // Submit to Google Sheets
+                const result = await submitToGoogleSheets(data, 'mentor');
+                
+                if (result.success) {
+                    document.getElementById('mentorSuccessMessage').style.display = 'block';
+                    this.reset();
+                    document.getElementById('fileName').textContent = '';
                     
-                    <h3>Our Vision</h3>
-                    <p>Beyond just competing, our true goal is to expose students to new ideas, build lifelong skills, and create an inclusive community of learners and leaders. We hope to grow this initiative into a multi-year program that strengthens STEM engagement across all school levels.</p>
+                    // Scroll to success message
+                    document.getElementById('mentorSuccessMessage').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                document.getElementById('mentorErrorMessage').style.display = 'block';
+                document.getElementById('mentorErrorMessage').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Handle mentee form submission
+        document.getElementById('menteeForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Check if at least one activity is selected
+            const activityCheckboxes = document.querySelectorAll('input[name="activities"]:checked');
+            if (activityCheckboxes.length === 0) {
+                alert('Please select at least one activity you\'re interested in.');
+                return;
+            }
+
+            const submitButton = document.getElementById('menteeSubmitBtn');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+
+            try {
+                // Collect form data
+                const formData = new FormData(this);
+                const selectedActivities = Array.from(activityCheckboxes).map(cb => cb.value);
+                
+                // Prepare data object
+                const data = {
+                    studentName: formData.get('studentName'),
+                    parentEmail: formData.get('parentEmail'),
+                    studentGrade: formData.get('studentGrade'),
+                    activities: selectedActivities.join(', '),
+                    timeCommitment: formData.get('student-time-commitment'),
+                    goals: formData.get('student-goals'),
+                    experience: formData.get('student-experience') || 'Not provided'
+                };
+
+                // Submit to Google Sheets
+                const result = await submitToGoogleSheets(data, 'mentee');
+                
+                if (result.success) {
+                    document.getElementById('menteeSuccessMessage').style.display = 'block';
+                    this.reset();
                     
-                    <p>As students advance into high school, they will be encouraged to return as mentors and continue
+                    // Scroll to success message
+                    document.getElementById('menteeSuccessMessage').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center' 
+                    });
+                } else {
+                    throw new Error(result.error || 'Submission failed');
+                }
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                document.getElementById('menteeErrorMessage').style.display = 'block';
+                document.getElementById('menteeErrorMessage').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            } finally {
+                submitButton.textContent = originalText;
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
+
